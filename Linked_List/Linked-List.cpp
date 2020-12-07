@@ -5,18 +5,6 @@
 #include <iomanip>
 #include <iostream>
 
-#include "project4.hpp"
-#include "History.hpp"
-#include "Transaction.hpp"
-
-////////////////////////////////////////////////////////////////////////////////
-// Definitions for Transaction class
-////////////////////////////////////////////////////////////////////////////////
-//
-//
-
-// Constructor
-// TASK 1
 //Transaction Class Constructor which initialises some of the values and sets the object pointers to their appropriate defintion.
 Transaction::Transaction( std::string ticker_symbol,  unsigned int day_date,
       unsigned int month_date,  unsigned year_date,
@@ -50,14 +38,10 @@ Transaction::Transaction( std::string ticker_symbol,  unsigned int day_date,
 }
 
 
-// Destructor
-// TASK 1
 //Transaction Class Destructor.
 Transaction::~Transaction(){
 }
 
-// Overloaded < operator.
-// TASK 2
 //Overloaded the "<" operator to help with the sort function which would allow the dates to be sorted in ascending order.
 bool Transaction::operator<( Transaction const &other ){
     if (year < other.year){
@@ -75,8 +59,7 @@ bool Transaction::operator<( Transaction const &other ){
     
 }
 // GIVEN
-// Member functions to get values.
-//Provided by Professors for the Project
+// Member functions to get values (getters)
 std::string Transaction::get_symbol() const { return symbol; }
 unsigned int Transaction::get_day() const { return day; }
 unsigned int Transaction::get_month() const { return month; }
@@ -92,8 +75,7 @@ unsigned int Transaction::get_trans_id() const { return trans_id; }
 Transaction *Transaction::get_next() { return p_next; }
 
 // GIVEN
-// Member functions to set values.
-//Provided by the Professors for the Project
+// Member functions to set values (setters)
 void Transaction::set_acb( double acb_value ) { acb = acb_value; }
 void Transaction::set_acb_per_share( double acb_share_value ) { acb_per_share = acb_share_value; }
 void Transaction::set_share_balance( unsigned int bal ) { share_balance = bal ; }
@@ -102,7 +84,6 @@ void Transaction::set_next( Transaction *p_new_next ) { p_next = p_new_next; }
 
 // GIVEN
 // Print the transaction.
-//Provided by the Professors for the Project
 void Transaction::print() {
   std::cout << std::fixed << std::setprecision(2);
   std::cout << std::setw(4) << get_trans_id() << " "
@@ -124,23 +105,11 @@ void Transaction::print() {
     << std::endl;
 }
 
-
-////////////////////////////////////////////////////////////////////////////////
-// Definitions for the History class
-////////////////////////////////////////////////////////////////////////////////
-//
-//
-
-
-// Constructor
-// TASK 3
 //History Class Constructor
 History::History(){
     this->p_head = nullptr;
 }
 
-// Destructor
-// TASK 3
 //History Class Destructor
 History::~History(){
     Transaction *p_temp = nullptr;
@@ -153,8 +122,6 @@ History::~History(){
     }
 }
 
-// read_transaction(...): Read the transaction history from file.
-// TASK 4
 //Read function reads all the transactions from the "Transactions_History.txt" file
 void History::read_history(){
     ece150::open_file();
@@ -173,8 +140,6 @@ void History::read_history(){
 }
     
 
-// insert(...): Insert transaction into linked list.
-// TASK 5
 //Insert function inserts the new transaction in the appropriate place in the Transaction History List.
 void History::insert(Transaction *p_new_trans){
    
@@ -319,8 +284,5 @@ void History::print(){
 
 // GIVEN
 // get_p_head(): Full access to the linked list.
-//
 Transaction *History::get_p_head() { return p_head; }
 
-
-#endif
